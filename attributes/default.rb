@@ -1,0 +1,13 @@
+default['chef_monitor']['download_path'] = "/opt/chef-monitor/orgs"
+default['chef_monitor']['install_dir']   = "/opt/chef-monitor"
+default['chef_monitor']['client_key']    = "/opt/chef-monitor/monitor.pem"
+default['chef_monitor']['mq_server']     = "127.0.0.1"
+default['chef_monitor']['node_name']     = "monitor"
+default['chef_monitor']['mon_file']      = "/var/log/opscode/nginx/access.log"
+default['chef_monitor']['mq_queue']      = "monitor_tasks"
+default['chef_monitor']['chef_url']      = "https://127.0.0.1"
+default['chef_monitor']['log_dir']       = "/var/log/chef-monitor"
+default['chef_monitor']['pid_dir']       = "/var/run/chef-monitor"
+
+default['chef_monitor']['emaildomain']   = "@yourdomain.com"
+default['chef_monitor']['project']       = "CHEF"

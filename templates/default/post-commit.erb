@@ -1,0 +1,33 @@
+#!/bin/bash
+#
+# --- Random number
+RANDOM=$$
+random_no=$RANDOM
+email_tmp_file="/tmp/git-email-$random_no"
+while [ -f $email_tmp_file ]
+do
+    random_no=$RANDOM
+    email_tmp_file="/tmp/git-email-$random_no"
+done
+
+# --- Config
+# Set GIT_DIR either from the working directory, or from the environment
+# variable.
+GIT_DIR=$(git rev-parse --git-dir 2>/dev/null)
+if [ -z "$GIT_DIR" ]; then
+        echo >&2 "fatal: post-receive: GIT_DIR not set"
+        exit 1
+fi
+
+# --- Main loop
+if [[ $(git config hooks.disabled) == true ]]; then
+  exit 0
+fi
+
+if [[ $(git config hooks.exclude) == true ]]; then
+  git config hooks.exclude false
+else
+  git show HEAD > $email_tmp_file
+  cat $email_tmp_file | /opt/chef-monitor/parse2htmlmail.pl | sendmail -t
+  rm -f $email_tmp_file
+fi
