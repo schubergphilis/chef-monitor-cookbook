@@ -1,10 +1,17 @@
+#COOKBOOK
+
+This cookbook will configure the chef monitoring tool on your back and frontend servers.  
+The information here below is needed when you want to configure everything manually.
+
+It has been tested on Centos 6.x
+
 #CHEF-MONITOR
 
 Chef monitor has two executables:
   - chef-logmon         (this will be activated on all frontend servers)
   - chef-worker         (this will be activated on your monitor/backend server)
 
-#Chef HA configuration:
+#CHEF HA
 
 When you have Chef in HA mode, your environment will look something like this:
 
@@ -83,7 +90,7 @@ In order to execute both tools, you will need the following configuration settin
 
 Save these settings into /opt/chef-monitor/config.rb (the cookbook will do this for you)  
 Make sure your monitor user is created on your chef server and has enough rights to download  
-all objects within your organizaton that you want to monitor.  
+all objects within your organization that you want to monitor.  
   
 Create a directory within your [download_path] with the same name as your organization.  
 Initialize this directory with the following commands:  
