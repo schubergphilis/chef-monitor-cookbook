@@ -31,19 +31,19 @@ Attribute prefix is: `['chef_monitor']`
     <td><tt>['node_name']</tt></td>
     <td>string</td>
     <td>Client name for authentication</td>
-    <td><tt>"monitor"1</tt></td>
+    <td><tt>"monitor"</tt></td>
   </tr>
   <tr>
     <td><tt>['mq_server']</tt></td>
     <td>string</td>
     <td>IP address or name of the RabbitMQ Server</td>
-    <td><tt>1</tt></td>
+    <td><tt>"127.0.0.1"</tt></td>
   </tr>
   <tr>
     <td><tt>['mq_queue']</tt></td>
     <td>string</td>
     <td>Queue name for the RabbitMQ Server</td>
-    <td><tt>0</tt></td>
+    <td><tt>"chef_monitor_tasks"</tt></td>
   </tr>
   <tr>
     <td><tt>['mon_file']</tt></td>
@@ -91,7 +91,7 @@ Attribute prefix is: `['chef_monitor']`
 </table>
 
 #USAGE
------
+
 #### chef_monitor::frontend
 
 This will install the chef-monitor gem and the needed configurations on the front-end (web) servers.
