@@ -1,3 +1,13 @@
+#NOTES
+Checkout the documentation on the wiki for a step by step intallation.  
+
+https://github.com/schubergphilis/chef-monitor-cookbook/wiki  
+
+You will need to have the following packages installed before the monitor can work:
+
+* private-chef-11.0.2-1.el6.x86_64.rpm
+* opscode-manage-1.1.0-1.el6.x86_64.rpm
+
 #ATTRIBUTES
 
 Attribute prefix is: `['chef_monitor']`
