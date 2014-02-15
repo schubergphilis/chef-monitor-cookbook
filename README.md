@@ -1,3 +1,135 @@
+#ATTRIBUTES
+
+Attribute prefix is: `['chef_monitor']`
+
+<table>
+  <tr>
+    <th>Key</th>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Default</th>
+  </tr>
+  <tr>
+    <td><tt>['download_path']</tt></td>
+    <td>string</td>
+    <td>Download dir for storing the files</td>
+    <td><tt>"/opt/chef-monitor/orgs"</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['install_dir']</tt></td>
+    <td>string</td>
+    <td>Install dir for the tools</td>
+    <td><tt>"/opt/chef-monitor"</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['client_key']</tt></td>
+    <td>string</td>
+    <td>Path to client pem file for authentication</td>
+    <td><tt>"/opt/chef-monitor/monitor.pem"</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['node_name']</tt></td>
+    <td>string</td>
+    <td>Client name for authentication</td>
+    <td><tt>"monitor"1</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['mq_server']</tt></td>
+    <td>string</td>
+    <td>IP address or name of the RabbitMQ Server</td>
+    <td><tt>1</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['mq_queue']</tt></td>
+    <td>string</td>
+    <td>Queue name for the RabbitMQ Server</td>
+    <td><tt>0</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['mon_file']</tt></td>
+    <td>string</td>
+    <td>Path to the nginx access logfile to monitor</td>
+    <td><tt>"/var/log/opscode/nginx/access.log"</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['chef_url']</tt></td>
+    <td>string</td>
+    <td>IP address or name of the chef server</td>
+    <td><tt>"https://127.0.0.1"</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['log_dir']</tt></td>
+    <td>string</td>
+    <td>Directory for the log files</td>
+    <td><tt>"/var/log/chef-monitor"</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['pid_dir']</tt></td>
+    <td>string</td>
+    <td>Directory for the pid files</td>
+    <td><tt>"/var/run/chef-monitor"</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['emaildomain']</tt></td>
+    <td>string</td>
+    <td>Your domain name</td>
+    <td><tt>"@your.domain.com"</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['project']</tt></td>
+    <td>string</td>
+    <td>Your project name, used in the emailsubject</td>
+    <td><tt>"CHEF_PROD"</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['orgs']</tt></td>
+    <td>hash</td>
+    <td>Your organizations that you want to monitor</td>
+    <td><tt>"{ "org": { "tag": "ORG", "mailinglist": "your-email@org.com" } }"</tt></td>
+  </tr>
+
+</table>
+
+#USAGE
+-----
+#### chef_monitor::frontend
+
+This will install the chef-monitor gem and the needed configurations on the front-end (web) servers.
+
+No real need to create a role for this, but if you want to do that and override the attributes then you can.
+
+#### chef_monitor::backend
+
+This will install the chef-monitor gem and the needed configurations on the back-end (database or monitoring) servers.
+
+Create a role that contains the cookbook and the following attributes:
+
+Role example:
+
+```json
+{
+  "name": "chef_monitor",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+    "chef_monitor": {
+      "orgs": {
+        "acme": { 
+          "tag": "ACME",
+          "mailinglist": "your_email@acme.com"
+        },
+        "sushicorp": {
+          "tag": "SUSHICORP",
+          "mailinglist": "your_email@sushicorp.com"
+      }
+    }
+  },
+  "chef_type": "role",
+  "run_list": [
+    "recipe[chef_monitor::backend]"
+  ]
+}
+```
+
 #COOKBOOK
 
 This cookbook will configure the chef monitoring tool on your back and frontend servers.  
